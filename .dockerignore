@@ -1,0 +1,6 @@
+README.md
+.gitattributes
+versions.properties
+build/
+*.log
+.env
