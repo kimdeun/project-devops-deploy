@@ -4,3 +4,5 @@ versions.properties
 build/
 *.log
 .env
+frontend/dist/
+frontend/node_modules
