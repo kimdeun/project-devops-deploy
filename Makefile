@@ -38,4 +38,4 @@ docker-build:
 	docker build -t my-app .
 
 docker-run:
-	docker run -p 8080:8080 -p 9090:9090my-app
+	docker run -p 8080:8080 -p 9090:9090 my-app
