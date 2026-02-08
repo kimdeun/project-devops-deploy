@@ -35,27 +35,7 @@ lint-fix:
 
 # Docker commands
 docker-build:
-	docker build -t $(FULL_IMAGE_NAME) -t $(IMAGE_NAME):latest .
+	docker build -t my-app .
 
 docker-run:
-	docker run --rm -p 8080:8080 -p 9090:9090 \
-		-e SPRING_PROFILES_ACTIVE=dev \
-		$(IMAGE_NAME):latest
-
-docker-test:
-	docker run --rm $(IMAGE_NAME):latest \
-		sh -c "java -jar app.jar --spring.profiles.active=test & sleep 10 && \
-		java -jar app.jar --spring.profiles.active=test --spring.main.web-application-type=none \
-		org.springframework.boot.loader.JarLauncher test || true"
-
-docker-push:
-	docker push $(FULL_IMAGE_NAME)
-	docker push $(REGISTRY)/$(IMAGE_NAME):latest
-
-docker-login:
-	@echo "Please login to your container registry:"
-	@echo "For Docker Hub: docker login"
-	@echo "For GitHub: docker login ghcr.io"
-	@echo "For Yandex: docker login cr.yandex"
-
-.PHONY: build docker-build docker-run docker-test docker-push docker-login
+	docker run -p 8080:8080 -p 9090:9090my-app
