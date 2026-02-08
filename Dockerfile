@@ -14,10 +14,10 @@ COPY gradle/ gradle/
 # копируем java код
 COPY src/ src/
 
-COPY --from=front-builder /app/frontend/dist/* ./src/main/resources/static/
+COPY --from=front-builder /app/frontend/dist/. ./src/main/resources/static/
 RUN ./gradlew build -x test
 
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:17-jre
 WORKDIR /app
 COPY --from=backend-builder /app/build/libs/*.jar app.jar
 EXPOSE 8080
