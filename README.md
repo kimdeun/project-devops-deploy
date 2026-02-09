@@ -1,5 +1,5 @@
 # Project DevOps Deploy
-
+[![bulletin-board](https://github.com/kimdeun/project-devops-deploy/actions/workflows/workflow.yml/badge.svg)](https://github.com/kimdeun/project-devops-deploy/actions/workflows/workflow.yml)
 Bulletin board service.
 
 ---
