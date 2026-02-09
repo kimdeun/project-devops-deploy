@@ -1,11 +1,13 @@
 # Docker image configuration
-IMAGE_NAME ?= project-devops-deploy
+IMAGE_NAME ?= 123c/hexlet
 IMAGE_TAG ?= latest
 REGISTRY ?= docker.io
+GIT_SHA ?= $(shell git rev-parse --short HEAD)
 # For GitHub Container Registry use: ghcr.io/your-username
 # For Yandex Container Registry use: cr.yandex/your-registry-id
 # For Docker Hub use: docker.io/your-username (or just your-username)
 FULL_IMAGE_NAME = $(REGISTRY)/$(IMAGE_NAME):$(IMAGE_TAG)
+SHA_IMAGE_NAME = $(REGISTRY)/$(IMAGE_NAME):sha-$(GIT_SHA)
 
 test:
 	./gradlew test
@@ -35,7 +37,11 @@ lint-fix:
 
 # Docker commands
 docker-build:
-	docker build -t my-app .
+	docker build -t $(FULL_IMAGE_NAME) -t $(SHA_IMAGE_NAME) .
+
+docker-push:
+	docker push $(FULL_IMAGE_NAME)
+	docker push $(SHA_IMAGE_NAME)
 
 docker-run:
 	docker run -p 8080:8080 -p 9090:9090 my-app
