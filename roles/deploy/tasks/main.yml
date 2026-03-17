@@ -1,4 +1,8 @@
-- name: сreate data directory
+- name: Load secrets
+  ansible.builtin.include_vars:
+    file: secrets.yml
+
+- name: Create data directory
   ansible.builtin.file:
     path: "{{ app_data_dir }}"
     state: directory
@@ -6,7 +10,7 @@
     group: "1000"
     mode: "0755"
 
-- name: сreate logs directory
+- name: Create logs directory
   ansible.builtin.file:
     path: "{{ app_logs_dir }}"
     state: directory
@@ -14,10 +18,25 @@
     group: "1000"
     mode: "0755"
 
-- name: pull docker image
+- name: Pull Docker image
   community.docker.docker_image:
     name: "{{ docker_image }}"
     tag: "{{ docker_tag }}"
     source: pull
     force_source: yes
   notify: restart container
+
+- name: Start application container
+  community.docker.docker_container:
+    name: "{{ container_name }}"
+    image: "{{ docker_image }}:{{ docker_tag }}"
+    state: started
+    restart_policy: unless-stopped
+    ports:
+      - "{{ app_port }}:8080"
+      - "{{ management_port }}:9090"
+    env: "{{ app_environment }}"
+    volumes:
+      - "{{ app_data_dir }}:/app/data"
+      - "{{ app_logs_dir }}:/app/logs"
+      - /root/.postgresql:/root/.postgresql:ro

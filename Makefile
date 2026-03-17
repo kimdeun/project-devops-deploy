@@ -47,11 +47,12 @@ docker-run:
 	docker run -p 8080:8080 -p 9090:9090 my-app
 
 deploy:
-	ansible-playbook -i inventory.ini deploy.yml
+	ansible-playbook -i inventory.ini deploy.yml --ask-vault-pass
 
 rollback:
 	@if [ -z "$(ROLLBACK_TAG)" ]; then \
 		echo "Ошибка: укажите ROLLBACK_TAG (например, make rollback ROLLBACK_TAG=sha-xyz789)"; \
 	exit 1; \
 	fi
-	ansible-playbook -i inventory.ini deploy.yml --extra-vars "docker_tag=$(ROLLBACK_TAG)"
+	ansible-playbook -i inventory.ini deploy.yml --extra-vars "docker_tag=$(ROLLBACK_TAG)" \
+	--ask-vault-pass

@@ -49,3 +49,10 @@
       community.general.ufw:
         rule: allow
         port: 9090
+    - name: download yandex cloud certificates
+      ansible.builtin.command:
+        shell: |
+          mkdir -p ~/.postgresql &&
+          wget "https://storage.yandexcloud.net/cloud-certs/CA.pem"
+            --output-document ~/.postgresql/root.crt &&
+          chmod 0655 ~/.postgresql/root.crt
