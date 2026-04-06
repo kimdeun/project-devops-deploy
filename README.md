@@ -1,7 +1,7 @@
 # Project DevOps Deploy
 [![bulletin-board](https://github.com/kimdeun/project-devops-deploy/actions/workflows/workflow.yml/badge.svg?branch=main)](https://github.com/kimdeun/project-devops-deploy/actions/workflows/workflow.yml)
 
-Bulletin board service. - http://hesss.sytes.net/#/bulletins
+Bulletin board service. - https://hesss.sytes.net/#/bulletins
 
 ---
 Hexlet info
