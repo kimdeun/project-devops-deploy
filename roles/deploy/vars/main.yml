@@ -10,3 +10,8 @@ app_environment:
   SPRING_DATASOURCE_URL: "{{ vault_db_url }}"
   SPRING_DATASOURCE_USERNAME: "{{ vault_db_user }}"
   SPRING_DATASOURCE_PASSWORD: "{{ vault_db_password }}"
+  STORAGE_S3_BUCKET: "{{ vault_s3_bucket }}"
+  STORAGE_S3_REGION: "{{ vault_s3_region }}"
+  STORAGE_S3_ENDPOINT: "{{ vault_s3_endpoint }}"
+  STORAGE_S3_ACCESSKEY: "{{ vault_s3_access_key }}"
+  STORAGE_S3_SECRETKEY: "{{ vault_s3_secret_key }}"
