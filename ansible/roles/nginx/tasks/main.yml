@@ -9,7 +9,7 @@
 
 - name: Copy Nginx config
   ansible.builtin.template:
-    src: app.conf.j2
+    src: nginx-http.conf.j2
     dest: /etc/nginx/sites-available/bulletin-board
   notify: Restart Nginx
 
