@@ -1,0 +1,19 @@
+server {
+    listen 80;
+    server_name {{ server_name }};
+
+    # Проксирование запросов к приложению
+    location / {
+        proxy_pass http://localhost:{{ app_port }};
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    # Кеширование статических файлов
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ {
+        proxy_pass http://localhost:{{ app_port }};
+        expires 30d;
+        add_header Cache-Control "public, no-transform";
+    }
+}
